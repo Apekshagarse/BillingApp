@@ -8,7 +8,7 @@ const dbRoutes = require('./routes/db');
 // Middleware
 app.use(cors(
     {
-        origin: ["https://billing-app-frontend-six.vercel.app"],
+        origin: ["https://billing-app-frontend-six.vercel.app/"],
         methods: ["POST", "GET"],
         credentials: true
     }
