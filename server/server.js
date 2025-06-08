@@ -5,17 +5,20 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dbRoutes = require('./routes/db');
 
-// Middleware
-app.use(cors(
-    {
-        origin: ["https://billing-app-frontend-six.vercel.app"],
-        methods: ["POST", "GET"],
-        credentials: true
-    }
-));
+// CORS config
+app.use(cors({
+    origin: ['https://billing-app-frontend-six.vercel.app'],
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type'],
+    credentials: true
+}));
+
+// Allow preflight
+app.options('*', cors());
+
 app.use(express.json());
 
-// Connect to MongoDB
+// MongoDB connection
 mongoose.connect(process.env.DATABASE, {
     dbName: 'BillingApp',
     useNewUrlParser: true,
@@ -24,11 +27,7 @@ mongoose.connect(process.env.DATABASE, {
 .then(() => console.log('✅ MongoDB Connected'))
 .catch((err) => {
     console.error('❌ MongoDB Error:', err);
-    process.exit(1); // Exit if DB connection fails
-});
-
-app.post('/api', (req, res) => {
-  res.send('Bill saved!');
+    process.exit(1);
 });
 
 // Test route
@@ -36,7 +35,12 @@ app.get('/', (req, res) => {
     res.send('🚀 Server is running!');
 });
 
-// API routes
+// Test POST route (optional)
+app.post('/test', (req, res) => {
+    res.send('✅ POST request works!');
+});
+
+// Main API routes
 app.use('/api', dbRoutes);
 
 // Start server
