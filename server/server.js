@@ -8,7 +8,7 @@ const dbRoutes = require('./routes/db');
 // Middleware
 app.use(cors(
     {
-        origin: ["https://billing-app-frontend-six.vercel.app/"],
+        origin: ["https://billing-app-frontend-six.vercel.app"],
         methods: ["POST", "GET"],
         credentials: true
     }
@@ -25,6 +25,10 @@ mongoose.connect(process.env.DATABASE, {
 .catch((err) => {
     console.error('❌ MongoDB Error:', err);
     process.exit(1); // Exit if DB connection fails
+});
+
+app.post('/api', (req, res) => {
+  res.send('Bill saved!');
 });
 
 // Test route
