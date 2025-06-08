@@ -6,13 +6,7 @@ const cors = require('cors');
 const dbRoutes = require('./routes/db');
 
 // Middleware
-app.use(cors(
-    {
-        origin: ["https://billing-app-frontend-six.vercel.app"],
-        methods: ["POST", "GET"],
-        credentials: true
-    }
-));
+app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB
