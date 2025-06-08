@@ -277,7 +277,7 @@
             if (!confirm('Are you sure you want to delete this bill? This action cannot be undone.')) return;
             
             try {
-                const response = await fetch(`http://localhost:8080/api/${billId}`, {
+                const response = await fetch(`https://billing-app-server.vercel.app/api/${billId}`, {
                     method: 'DELETE'
                 });
                 
