@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 });
 
 // MongoDB connection
-mongoose.connect(mongodb+srv://apeksha:HelloWorld_1999@cluster0.wmxce.mongodb.net/billingapp)
+mongoose.connect(process.env.DATABASE)
     .then(() => console.log('✅ MongoDB Connected'))
     .catch((err) => {
         console.error('❌ MongoDB Error:', err);
