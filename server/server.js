@@ -22,7 +22,7 @@ mongoose.connect(mongodb+srv://apeksha:HelloWorld_1999@cluster0.wmxce.mongodb.ne
         process.exit(1);
     });
 // Main API routes
-app.use('/api', dbRoutes);
+app.use('/api/records', dbRoutes);
 
 // Export for Vercel
 module.exports = app;
