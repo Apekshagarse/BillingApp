@@ -4,7 +4,7 @@ const Bill = require('../model/bill_schema');
 
 // Create a new bill
 // POST: Create a new bill
-router.post("/submit", async (req, res) => {
+router.post("/", async (req, res) => {
     try {
         const { customerName, products, totalAmount, paymentMethod } = req.body;
 
@@ -29,7 +29,7 @@ router.post("/submit", async (req, res) => {
 });
 
 // GET: Fetch all bills
-router.get("/records", async (req, res) => {
+router.get("/", async (req, res) => {
     try {
         const { billId } = req.query;
 
