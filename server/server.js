@@ -13,38 +13,26 @@ app.use(cors({
     credentials: true
 }));
 
-// Allow preflight
-app.options('*', cors());
-
 app.use(express.json());
-
-// MongoDB connection
-mongoose.connect(process.env.DATABASE, {
-    dbName: 'BillingApp',
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
-.then(() => console.log('✅ MongoDB Connected'))
-.catch((err) => {
-    console.error('❌ MongoDB Error:', err);
-    process.exit(1);
-});
-
 // Test route
 app.get('/', (req, res) => {
     res.send('🚀 Server is running!');
 });
 
-// Test POST route (optional)
-app.post('/test', (req, res) => {
-    res.send('✅ POST request works!');
-});
-
+// MongoDB connection
+mongoose.connect(process.env.DATABASE)
+    .then(() => console.log('✅ MongoDB Connected'))
+    .catch((err) => {
+        console.error('❌ MongoDB Error:', err);
+        process.exit(1);
+    });
 // Main API routes
 app.use('/api', dbRoutes);
 
+// Export for Vercel
+module.exports = app;
+
 // Start server
-const PORT = process.env.PORT || 6000;
-app.listen(PORT, () => {
+app.listen(process.env.PORT || 6000, () => {
     console.log(`✅ Server is running on port ${PORT}`);
 });
