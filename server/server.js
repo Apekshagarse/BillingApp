@@ -1,30 +1,33 @@
-require('dotenv').config();
 const express = require('express');
-const app = express();
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 const cors = require('cors');
-const serverless = require('serverless-http');
-const dbRoutes = require('./routes/db'); // Adjusted for relative path
+const workoutRoutes = require('./routes/db');
 
-app.use(cors({
-  origin: 'https://billing-app-frontend-six.vercel.app',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  credentials: true
-}));
+dotenv.config();
 
-app.options('*', cors());
+const app = express();
+
+// Middleware
+app.use(cors());
 app.use(express.json());
 
-app.get('/', (req, res) => res.send('🚀 Server is running!'));
+// Health check / root route
+app.get('/', (req, res) => {
+  res.send('Welcome to the Fitness Tracker Server');
+});
 
-mongoose.connect(process.env.DATABASE)
-  .then(() => console.log('✅ MongoDB Connected'))
-  .catch((err) => {
-    console.error('❌ MongoDB Error:', err);
-    process.exit(1);
+// Routes
+app.use('/api', workoutRoutes);
+
+// MongoDB connection
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log('✅ Connected to MongoDB');
+  })
+  .catch(err => {
+    console.error('❌ MongoDB connection error:', err.message);
   });
 
-app.use('/api', dbRoutes);
-
+// Export for Vercel
 module.exports = app;
-module.exports.handler = serverless(app);
