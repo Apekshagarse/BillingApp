@@ -24,7 +24,7 @@ mongoose.connect(process.env.DATABASE)
         process.exit(1);
     });
 // Main API routes
-app.use('/api/records', dbRoutes);
+app.use('/api', dbRoutes);
 
 // Export for Vercel
 module.exports = app;
