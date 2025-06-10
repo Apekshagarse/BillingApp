@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
+const serverless = require('serverless-http');
 const dbRoutes = require('./routes/db'); // Adjusted for relative path
 
 app.use(cors({
@@ -26,3 +27,4 @@ mongoose.connect(process.env.DATABASE)
 app.use('/api', dbRoutes);
 
 module.exports = app;
+module.exports.handler = serverless(app);
