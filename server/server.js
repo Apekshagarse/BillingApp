@@ -6,7 +6,9 @@ const cors = require('cors');
 const dbRoutes = require('./routes/db');
 
 // CORS config
-app.use(cors());
+app.use(cors(
+    {origin: 'https://billing-app-frontend-six.vercel.app'}
+));
 
 app.use(express.json());
 // Test route
