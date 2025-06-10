@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 app.use('/api', workoutRoutes);
 
 // MongoDB connection
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.DATABASE)
   .then(() => {
     console.log('✅ Connected to MongoDB');
   })
