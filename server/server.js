@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
-const dbRoutes = require('../routes/db'); // Adjusted for relative path
+const dbRoutes = require('./routes/db'); // Adjusted for relative path
 
 app.use(cors({
   origin: 'https://billing-app-frontend-six.vercel.app',
