@@ -5,10 +5,14 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dbRoutes = require('./routes/db');
 
-// CORS config
-app.use(cors(
-    {origin: 'https://billing-app-frontend-six.vercel.app'}
-));
+app.use(cors({
+  origin: 'https://billing-app-frontend-six.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  credentials: true
+}));
+
+// Optional: For preflight requests
+app.options('*', cors());
 
 app.use(express.json());
 // Test route
