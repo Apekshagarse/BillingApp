@@ -192,6 +192,12 @@
                     throw new Error('Network response was not ok');
                 }
                 const bills = await response.json();
+
+                // Sort by date (newest first)
+                const sortedBills = bills.sort((a, b) => {
+                    return new Date(b.date || b.createdAt) - new Date(a.date || a.createdAt);
+                });
+                
                 displayBills(bills);
                 updateStats(bills);
             } catch (error) {
