@@ -1,54 +1,56 @@
-import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import BillingPage from './pages/BillingPage';
-import AdminPage from './pages/AdminPage';
-import { saveBill, getBills } from './services/api';
+import React, { useState } from 'react';
+import BillHeader from './components/BillHeader';
+import ProductTable from './components/ProductTable';
+import AddProductForm from './components/AddProductForm';
+import PaymentOptions from './components/PaymentOptions';
 import './styles/billStyles.css';
+import './styles/tableStyles.css';
 
 function App() {
-  const [bills, setBills] = useState([]);
+  const [customerName, setCustomerName] = useState('Enter Customer Name');
+  const [contactNo, setContactNo] = useState('Enter mobile Number');
+  const [products, setProducts] = useState([]);
+  const [totalAmount, setTotalAmount] = useState(0);
 
-  useEffect(() => {
-    const fetchBills = async () => {
-      try {
-        const data = await getBills();
-        setBills(data);
-      } catch (error) {
-        console.error("Failed to fetch bills:", error);
-      }
-    };
-    fetchBills();
-  }, []);
+  const addProduct = (product) => {
+    const newProducts = [...products, product];
+    setProducts(newProducts);
+    calculateTotal(newProducts);
+  };
 
-  const handleSaveBill = async (billData) => {
-    try {
-      const savedBill = await saveBill(billData);
-      setBills([savedBill, ...bills]);
-      alert('Bill saved successfully!');
-    } catch (error) {
-      console.error('Error saving bill:', error);
-      alert('Error saving bill');
-    }
+  const removeProduct = (index) => {
+    const newProducts = products.filter((_, i) => i !== index);
+    setProducts(newProducts);
+    calculateTotal(newProducts);
+  };
+
+  const calculateTotal = (productsList) => {
+    const total = productsList.reduce((sum, product) => {
+      return sum + (product.price * product.quantity * (1 - product.discount / 100));
+    }, 0);
+    setTotalAmount(total.toFixed(2));
   };
 
   return (
-    <Router>
-      <div className="app">
-        <nav>
-          <Link to="/">Billing</Link>
-          <Link to="/admin">Admin</Link>
-        </nav>
-        
-        <Routes>
-          <Route path="/" element={
-            <BillingPage onSave={handleSaveBill} />
-          } />
-          <Route path="/admin" element={
-            <AdminPage bills={bills} />
-          } />
-        </Routes>
-      </div>
-    </Router>
+    <div className="bill-container">
+      <h1 className="bill-title">SANGHAMITRA BILL</h1>
+      
+      <BillHeader 
+        customerName={customerName}
+        contactNo={contactNo}
+        onNameChange={setCustomerName}
+        onContactChange={setContactNo}
+      />
+      
+      <ProductTable 
+        products={products} 
+        onRemove={removeProduct} 
+      />
+      
+      <AddProductForm onAdd={addProduct} />
+      
+      <PaymentOptions totalAmount={totalAmount} />
+    </div>
   );
 }
 
