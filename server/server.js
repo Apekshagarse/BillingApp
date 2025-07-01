@@ -14,7 +14,7 @@ app.use(express.json());
 
 // Health check / root route
 app.get('/', (req, res) => {
-  res.send('Welcome to the Fitness Tracker Server');
+  res.send('Welcome');
 });
 
 // Routes
