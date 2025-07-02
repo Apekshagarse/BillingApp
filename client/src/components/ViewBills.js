@@ -11,7 +11,7 @@ const ViewBills = () => {
 
   const fetchBills = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/');
+      const response = await fetch('https://billing-app-client.vercel.app/api/');
       const data = await response.json();
       const sorted = data.sort((a, b) => new Date(b.date || b.createdAt) - new Date(a.date || a.createdAt));
       setBills(sorted);
