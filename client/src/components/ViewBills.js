@@ -24,7 +24,7 @@ const ViewBills = () => {
   const deleteBill = async (id) => {
     if (!window.confirm('Are you sure you want to delete this bill?')) return;
     try {
-      const response = await fetch(`http://localhost:8080/api/${id}`, {
+      const response = await fetch(`https://billing-app-server.vercel.app/api/${id}`, {
         method: 'DELETE'
       });
       const result = await response.json();
