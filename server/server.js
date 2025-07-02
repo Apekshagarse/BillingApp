@@ -10,7 +10,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: 'https://billing-app-client.vercel.app/', // or your React app's URL
+  origin: 'https://billing-app-client.vercel.app', // or your React app's URL
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
