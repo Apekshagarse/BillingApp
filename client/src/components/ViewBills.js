@@ -28,12 +28,13 @@ const ViewBills = () => {
         method: 'DELETE'
       });
       const result = await response.json();
-      if (result.success) {
+      if (response.ok) {
         alert('Bill deleted');
         fetchBills();
       } else {
         throw new Error(result.message);
       }
+
     } catch (err) {
       alert('Error deleting bill');
     }
@@ -57,8 +58,8 @@ const ViewBills = () => {
   return (
     <div className="admin-container">
       <div className="header">
-        <button id="backBtn" onClick={() => window.location.href = '/'}>Back to Billing</button>
-        <h1>SANGHAMITRA BILL - ADMIN PANEL</h1>
+        <button id="backBtn" onClick={() => window.location.href = '/'}>Go Back to Home</button>
+        <h1>SANGHAMITRA BILL - Records</h1>
         <img src="/sanghamitra logo.jpeg" alt="Sanghamitra Logo" className="logo" />
       </div>
 

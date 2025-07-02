@@ -20,7 +20,7 @@
 }
 
 h1 {
-  color: #15196a;
+  color: hsl(220, 16%, 96%);
   margin: 0;
   text-align: center;
   flex: 1;
@@ -49,7 +49,7 @@ button:hover {
 }
 
 .delete-btn {
-  background-color: #e63946;
+  background-color: #f4f0f0;
 }
 
 .delete-btn:hover {

@@ -16,7 +16,7 @@ const AdminLogin = () => {
 
     if (username === adminUser && password === adminPass) {
       localStorage.setItem('adminAuthenticated', true);
-      navigate('/admin');
+      navigate('/view');
     } else {
       setError('Invalid username or password');
     }

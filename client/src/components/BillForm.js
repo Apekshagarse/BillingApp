@@ -109,7 +109,7 @@ const BillForm = () => {
     };
 
     try {
-      const res = await fetch('http://localhost:3000/api/', {
+      const res = await fetch('http://localhost:8080/api/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(billData)
@@ -227,7 +227,8 @@ const BillForm = () => {
 
       <div className="buttons">
         <button onClick={handleSubmit}>Save Bill</button>
-        <button onClick={() => window.location.href = '/admin'}>Go to Admin Page</button>
+        <button onClick={() => window.location.href = '/view'}>Go to Admin Page</button>
+        <button onClick={() => window.print()}>Print</button>
       </div>
 
       <div className="footer">

@@ -5,15 +5,17 @@ import ViewBills from './components/ViewBills';
 import './styles/ViewBills.css';
 import AdminLogin from './components/AdminLogin';
 import './styles/AdminLogin.css';
-
+import Home from './components/Home';
+import './styles/Home.css';
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<BillForm />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/bill" element={<BillForm />} />
         <Route path="/admin-login" element={<AdminLogin />} />
-        <Route path="/admin" element={<ViewBills />} />
+        <Route path="/view" element={<ViewBills />} />
       </Routes>
     </Router>
   );
