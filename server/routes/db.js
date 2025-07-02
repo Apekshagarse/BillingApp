@@ -4,7 +4,7 @@ const Bill = require('../model/bill_schema');
 
 // Create a new bill
 // POST: Create a new bill
-router.post("/post_bill", async (req, res) => {
+router.post("/", async (req, res) => {
     try {
         const { customerName, products, totalAmount, paymentMethod } = req.body;
 
@@ -29,7 +29,7 @@ router.post("/post_bill", async (req, res) => {
 });
 
 // GET: Fetch all bills
-router.get("/get_bills", async (req, res) => {
+router.get("/", async (req, res) => {
     try {
         const { billId } = req.query;
 
@@ -54,12 +54,13 @@ router.delete("/:id", async (req, res) => {
     try {
         const deletedBill = await Bill.findByIdAndDelete(req.params.id);
         if (!deletedBill) {
-            return res.status(404).json({ message: "Bill not found" });
+            return res.status(404).json({ success: false, message: "Bill not found" });
         }
-        res.json({ message: "Bill deleted successfully", bill: deletedBill });
+        res.json({ success: true, message: "Bill deleted successfully", bill: deletedBill });
     } catch (error) {
-        res.status(500).json({ message: "Server Error", error: error.message });
+        res.status(500).json({ success: false, message: "Server Error", error: error.message });
     }
 });
+
 
 module.exports = router;
