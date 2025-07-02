@@ -17,9 +17,19 @@ app.use(cors({
 app.use(express.json());
 
 // Health check / root route
+<<<<<<< HEAD
 /*app.get('/', (req, res) => {
   res.send('Welcome to Sanghamitra Billing App');
 });*/
+||||||| 0bf9404
+app.get('/', (req, res) => {
+  res.send('Welcome to the Fitness Tracker Server');
+});
+=======
+app.get('/', (req, res) => {
+  res.send('Welcome');
+});
+>>>>>>> 3c5bd6eed8aa8e0677d7560573eb2c2376fd47e5
 
 // Routes
 app.use('/api', workoutRoutes);
